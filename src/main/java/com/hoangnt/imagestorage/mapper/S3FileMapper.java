@@ -25,7 +25,7 @@ public class S3FileMapper {
         return response;
     }
 
-    public ListFileResponse ToListResponse(List<S3File> files){
+    public ListFileResponse toListResponse(List<S3File> files){
         ListFileResponse response = new ListFileResponse();
         for (S3File file : files){
             response.addContentItem(toModel(file));

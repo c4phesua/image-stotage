@@ -27,7 +27,7 @@ public class FileController implements FilesUploadApi {
 
     @Override
     public ResponseEntity<ListFileResponse> getAllFiles() {
-        return ResponseEntity.ok(mapper.ToListResponse(fileService.getAll()));
+        return ResponseEntity.ok(mapper.toListResponse(fileService.getAll()));
     }
 
     @Override
