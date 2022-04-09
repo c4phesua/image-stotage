@@ -51,6 +51,34 @@ paths:
           description: Delete successfully
         '400':
           description: Bad request
+  /files-upload/{id}/tags:
+    put:
+      tags:
+        - Files
+      summary: API for create tag or update tags
+      operationId: putTags
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: image ID.
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/PutTagsRequest'
+      responses:
+        '200':
+          description: Put successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadFileResponse'
+        '400':
+          description: Bad request
 
 components:
   schemas:
@@ -61,6 +89,8 @@ components:
           type: integer
           format: int64
         fileUrl:
+          type: string
+        tags:
           type: string
     ListFileResponse:
       type: object
@@ -73,4 +103,9 @@ components:
       type: object
       properties:
         url:
+          type: string
+    PutTagsRequest:
+      type: object
+      properties:
+        tags:
           type: string

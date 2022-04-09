@@ -56,7 +56,7 @@ public class FileService {
         this.s3FileRepository = s3FileRepository;
     }
 
-    public UploadFileResponse uploadFile(Resource file) {
+    public S3File uploadFile(Resource file) {
         File targetFile = null;
         try {
             String fileName = UUID.randomUUID().toString().replace("-", "");
@@ -72,11 +72,8 @@ public class FileService {
                     targetFile).withCannedAcl(
                     CannedAccessControlList.PublicRead));
             URL url = s3Client.getUrl(bucketName, fileName);
-            UploadFileResponse response = new UploadFileResponse();
-            response.setFileUrl(url.toString());
             S3File s3File = S3File.builder().url(url.toString()).status(FileStatus.ACTIVE).build();
-            s3FileRepository.save(s3File);
-            return response;
+            return s3FileRepository.save(s3File);
         } catch (IOException e) {
             throw new BadRequestException(e.getMessage());
         } finally {
@@ -86,19 +83,17 @@ public class FileService {
         }
     }
 
-    public ListFileResponse getAll() {
-        List<S3File> files = s3FileRepository.findAll();
-        ListFileResponse response = new ListFileResponse();
-        for (S3File file : files) {
-            UploadFileResponse fileResponse = new UploadFileResponse();
-            fileResponse.setFileUrl(file.getUrl());
-            fileResponse.setId(file.getId());
-            response.addContentItem(fileResponse);
-        }
-        return response;
+    public List<S3File> getAll() {
+        return s3FileRepository.findAll();
     }
 
     public void deleteByUrl(String url){
         s3FileRepository.deleteByUrl(url);
+    }
+
+    public S3File putTags(String tags, long id){
+        S3File file = s3FileRepository.getById(id);
+        file.setTags(tags);
+        return s3FileRepository.save(file);
     }
 }
