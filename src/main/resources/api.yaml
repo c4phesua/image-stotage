@@ -1,0 +1,76 @@
+openapi: 3.0.3
+info:
+  title: PBS Service
+  version: 1.0.0
+servers:
+  - url: 'https://localhost/pbs-service'
+paths:
+  /files-upload:
+    post:
+      tags:
+        - Files
+      summary: API for upload images
+      operationId: uploadFiles
+      requestBody:
+        content:
+          image/jpg:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: Upload successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadFileResponse'
+    get:
+      tags:
+        - Files
+      summary: API for get images
+      operationId: getAllFiles
+      responses:
+        '200':
+          description: get successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFileResponse'
+    delete:
+      tags:
+        - Files
+      summary: API for get images
+      operationId: deleteFile
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/DeleteFileRequest'
+      responses:
+        '200':
+          description: Delete successfully
+        '400':
+          description: Bad request
+
+components:
+  schemas:
+    UploadFileResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        fileUrl:
+          type: string
+    ListFileResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/UploadFileResponse'
+    DeleteFileRequest:
+      type: object
+      properties:
+        url:
+          type: string
