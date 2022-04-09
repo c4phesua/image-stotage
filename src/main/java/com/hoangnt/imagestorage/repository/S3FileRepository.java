@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface S3FileRepository extends JpaRepository<S3File, Long> {
-    S3File deleteByUrl(String url);
+    void deleteByUrl(String url);
 }
