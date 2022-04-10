@@ -20,8 +20,8 @@ public class FileController implements FilesUploadApi {
     private final S3FileMapper mapper;
 
     @Override
-    public ResponseEntity<Void> deleteFile(DeleteFileRequest deleteFileRequest) {
-        fileService.deleteByUrl(deleteFileRequest.getUrl());
+    public ResponseEntity<Void> deleteFile(Long id) {
+        fileService.delete(id);
         return ResponseEntity.ok(null);
     }
 

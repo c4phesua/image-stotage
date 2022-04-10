@@ -8,31 +8,22 @@ import com.amazonaws.services.amplify.model.BadRequestException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3ObjectSummary;
-import com.hoangnt.imagestorage.api.model.ListFileResponse;
-import com.hoangnt.imagestorage.api.model.UploadFileResponse;
 import com.hoangnt.imagestorage.entity.FileStatus;
 import com.hoangnt.imagestorage.entity.S3File;
 import com.hoangnt.imagestorage.repository.S3FileRepository;
-import lombok.AllArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Validator;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -87,8 +78,8 @@ public class FileService {
         return s3FileRepository.findAll();
     }
 
-    public void deleteByUrl(String url){
-        s3FileRepository.deleteByUrl(url);
+    public void delete(long id){
+        s3FileRepository.deleteById(id);
     }
 
     public S3File putTags(String tags, long id){

@@ -36,16 +36,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListFileResponse'
+  /files-upload/{id}:
     delete:
       tags:
         - Files
-      summary: API for get images
+      summary: API for delete images
       operationId: deleteFile
-      requestBody:
-        content:
-          'application/json':
-            schema:
-              $ref: '#/components/schemas/DeleteFileRequest'
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: image ID.
       responses:
         '200':
           description: Delete successfully
@@ -91,6 +95,8 @@ components:
         fileUrl:
           type: string
         tags:
+          type: string
+        character:
           type: string
     ListFileResponse:
       type: object

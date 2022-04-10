@@ -40,4 +40,7 @@ public class S3File {
 
     @Column(name = "tags", length=10485760)
     private String tags;
+
+    @Column(name = "tags", length=10485760)
+    private String character;
 }
