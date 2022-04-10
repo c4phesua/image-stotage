@@ -36,6 +36,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListFileResponse'
+    put:
+      tags:
+        - Files
+      summary: API for update images
+      operationId: updateFile
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/UploadFileResponse'
+      responses:
+        '200':
+          description: Delete successfully
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/UploadFileResponse'
+        '400':
+          description: Bad request
   /files-upload/{id}:
     delete:
       tags:

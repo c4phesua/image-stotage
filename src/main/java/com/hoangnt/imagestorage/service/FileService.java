@@ -87,4 +87,8 @@ public class FileService {
         file.setTags(tags);
         return s3FileRepository.save(file);
     }
+
+    public S3File update(S3File file){
+        return s3FileRepository.save(file);
+    }
 }

@@ -35,6 +35,11 @@ public class FileController implements FilesUploadApi {
     }
 
     @Override
+    public ResponseEntity<UploadFileResponse> updateFile(UploadFileResponse uploadFileResponse) {
+        return ResponseEntity.ok(mapper.toModel(fileService.update(mapper.toEntity(uploadFileResponse))));
+    }
+
+    @Override
     public ResponseEntity<UploadFileResponse> uploadFiles(Resource body) {
         return ResponseEntity.ok(mapper.toModel(fileService.uploadFile(body)));
     }
