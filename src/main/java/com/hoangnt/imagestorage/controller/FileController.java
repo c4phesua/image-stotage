@@ -1,7 +1,6 @@
 package com.hoangnt.imagestorage.controller;
 
 import com.hoangnt.imagestorage.api.FilesUploadApi;
-import com.hoangnt.imagestorage.api.model.DeleteFileRequest;
 import com.hoangnt.imagestorage.api.model.ListFileResponse;
 import com.hoangnt.imagestorage.api.model.PutTagsRequest;
 import com.hoangnt.imagestorage.api.model.UploadFileResponse;
