@@ -22,6 +22,7 @@ public class S3FileMapper {
         response.setFileUrl(file.getUrl());
         response.setId(file.getId());
         response.setTags(file.getTags());
+        response.setCharacter(file.getCharacter());
         return response;
     }
 
